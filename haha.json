@@ -1,0 +1,28 @@
+[ 
+{ 
+"id_jadwal":1,
+"id_matkul":null,
+"kode_matkul":"WAT 020208",
+"nama_matkul":"Antropologi Kesehatan (T)",
+"sks":2,
+"semester":2,
+"tingkat":1,
+"waktu":"08.00-09.40 WIB",
+"hari":"Senin",
+"id_dosen1":null,
+"dosen1":"Ns. Hendri Heriyanto, M.Kep, ",
+"id_dosen2":null,
+"dosen2":"Efrizon, SKM.,M.P.H.",
+"id_dosen_koordinator":null,
+"koordinator":"Dr. Drg. Daisy Novira, MARS",
+"id_prodi":null,
+"prodi":"D3 Keperawatan",
+"id_ruangan":null,
+"kode_ruangan":"IAN.II.5",
+"id_alat":null,
+"nama_alat":"Wireless",
+"tahun_akademik":"2020",
+"teori":2,
+"praktik":0,
+"klinik":0
+}]

@@ -37,11 +37,11 @@
 									        	
 										        <div class="form-group">
 										            <label for="kode_ruangan" class="col-form-label">Kode Ruangan :</label>
-										            <input type="text" class="form-control" name="kode_ruangan" id="kode_ruangan" placeholder="masukkan kode ruangan" required>
+										            <input type="text" class="form-control" name="kode_ruangan" placeholder="masukkan kode ruangan" required>
 										        </div>
 										        <div class="form-group">
 										            <label for="kapasitas_ruangan" class="col-form-label">Kapasitas Ruangan :</label>
-										            <input type="number" class="form-control" name="kapasitas_ruangan" id="kapasitas_ruangan" placeholder="masukkan kapasitas ruangan" required>
+										            <input type="number" class="form-control" name="kapasitas_ruangan"  placeholder="masukkan kapasitas ruangan" required>
 										        </div>
 										        
 										        <div class="modal-footer">
@@ -168,11 +168,11 @@
 
                       <div class="form-group">
                         <label for="kode_ruangan" class="col-form-label">Kode Ruangan :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="kode_ruangan" id="kode_ruangan" value="<?php echo $row->kode_ruangan; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="kode_ruangan" value="<?php echo $row->kode_ruangan; ?>" required>
                       </div>
                       <div class="form-group">
                         <label for="kapasitas_ruangan" class="col-form-label">Kapasitas Ruangan :</label>
-                        <input type="number" class="form-control" autocomplete="on" name="kapasitas_ruangan" id="kapasitas_ruangan" value="<?php echo $row->kapasitas_ruangan; ?>" required>
+                        <input type="number" class="form-control" autocomplete="on" name="kapasitas_ruangan"  value="<?php echo $row->kapasitas_ruangan; ?>" required>
                       </div>
                   
                     </div>

@@ -44,12 +44,12 @@
 										        </div>
 										        <div class="form-group">
                                                     <label class='col-form-label'>Jenis Kelamin :</label><br>
-                                                      <input class="form-check-input" type="radio" name="jk_dosen" id="exampleRadios1" value="Laki-Laki">
-                                                      <label class="form-check-label" for="exampleRadios1">
+                                                      <input class="form-check-input" type="radio" name="jk_dosen" id="example1" value="L">
+                                                      <label class="form-check-label" for="example1">
                                                         Laki-Laki
                                                       </label>
-                                                      <input class="form-check-input" type="radio" name="jk_dosen" id="exampleRadios2" value="Perempuan">
-                                                      <label class="form-check-label" for="exampleRadios2">
+                                                      <input class="form-check-input" type="radio" name="jk_dosen" id="example2" value="P">
+                                                      <label class="form-check-label" for="example2">
                                                         Perempuan
                                                       </label>
                                                   </div>
@@ -181,8 +181,15 @@
                         <input type="text" class="form-control" autocomplete="on" name="nama_dosen" id="nama_dosen" value="<?php echo $row->nama_dosen; ?>" required>
                       </div>
                       <div class="form-group">
-                        <label for="jk_dosen" class="col-form-label">Jenis Kelamin :</label><br>
-                        <input type="text" class="form-control" autocomplete="on" name="jk_dosen" id="jk_dosen" value="<?php echo $row->jk_dosen; ?>" required>
+                       <label class='col-form-label'>Jenis Kelamin :</label><br>
+                        <input class="form-check-input" <?=$row->jk_dosen == 'L' ? 'checked' : ''?> type="radio" name="jk_dosen" id="exampleRadios<?=$row->id_dosen;?>" value="L">
+                        <label class="form-check-label" for="exampleRadios<?=$row->id_dosen;?>">
+                          Laki-Laki
+                        </label>
+                        <input class="form-check-input" <?=$row->jk_dosen == 'P' ? 'checked' : ''?> type="radio" name="jk_dosen" id="exampleRadioss<?=$row->id_dosen;?>" value="P">
+                        <label class="form-check-label" for="exampleRadioss<?=$row->id_dosen;?>">
+                          Perempuan
+                        </label>
                       </div>
 
                     </div>

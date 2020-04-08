@@ -4,11 +4,11 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="<?php echo base_url(); ?>assets/images/user.png" width="48" height="48" alt="User" />
+                    <img src="<?php echo base_url($user->foto); ?>" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
-                    <div class="username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $this->session->userdata('username'); ?></div>
-                    <div class="email"><?php echo $this->session->userdata('email'); ?></div>
+                    <div class="username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $user->username; ?></div>
+                    <div class="email"><?php echo $user->email; ?></div>
                 </div>
             </div>
             <!-- #User Info -->

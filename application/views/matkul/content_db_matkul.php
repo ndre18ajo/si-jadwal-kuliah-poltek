@@ -52,7 +52,12 @@
 										        </div>
 										        <div class="form-group">
 										            <label for="prodi" class="col-form-label">Program Studi :</label>
-										            <input type="text" class="form-control" name="prodi" id="prodi" placeholder="masukkan program studi" required>
+
+                                <select name="id_prodi" class="form-control">
+                                  <?php foreach ($prodi as $key => $value) :?>
+                                  <option value="<?=$value->id_prodi?>"><?=$value->prodi?></option>
+                                  <?php endforeach; ?>
+                                </select>
 										        </div>
 										        <div class="form-group">
 										            <label for="tingkat" class="col-form-label">Tingkat :</label>
@@ -124,9 +129,9 @@
                                             <td><?php echo $row->tahun_akademik; ?></td>
                                             <td>
                                             	<center>
-                                            		<a data-toggle="modal" data-target="#modal-edit1<?=$row->kode_matkul;?>" class="btn btn-warning btn-circle" data-popup="tooltip" data-placement="top" title="Edit Data"><i class="material-icons">update</i></a>
+                                            		<a data-toggle="modal" data-target="#modal-edit1<?=$row->id_matkul;?>" class="btn btn-warning btn-circle" data-popup="tooltip" data-placement="top" title="Edit Data"><i class="material-icons">update</i></a>
 
-                                                    <a data-toggle="modal" data-target="#modal-hapus<?=$row->kode_matkul;?>" class="btn btn-danger btn-circle" data-popup="tooltip" data-placement="top" title="Hapus Data"><i class="material-icons">delete</i></a>
+                                                <a data-toggle="modal" data-target="#modal-hapus<?=$row->id_matkul;?>" class="btn btn-danger btn-circle" data-popup="tooltip" data-placement="top" title="Hapus Data"><i class="material-icons">delete</i></a>
                                             	</center>
                                             </td>
                                         </tr>
@@ -145,7 +150,7 @@
             <!-- modal hapus data -->
             <?php $no=0; foreach($all as $row):  ?>
             <div class="row">
-              <div id="modal-hapus<?=$row->kode_matkul;?>" class="modal fade">
+              <div id="modal-hapus<?=$row->id_matkul;?>" class="modal fade">
                 <div class="modal-dialog">
                   <form action="<?php echo site_url('c_matkul/hapus'); ?>" method="post">
                   <div class="modal-content">
@@ -154,7 +159,7 @@
                     </div>
                     <div class="modal-body">
 
-                      <input type="hidden" readonly value="<?php echo $row->kode_matkul; ?>" name="kode_matkul" class="form-control" >
+                      <input type="hidden" readonly value="<?php echo $row->id_matkul; ?>" name="id_matkul" class="form-control" >
 
                       <div class="form-group">
                         <div class='col-md-9'><h4>Apakah Anda Yakin Ingin Menghapus Data ini?</h4></div>
@@ -175,7 +180,7 @@
             <!-- modal ubah -->
             <?php $no=0; foreach($all as $row):  ?>
             <div class="row">
-              <div id="modal-edit1<?=$row->kode_matkul;?>" class="modal fade">
+              <div id="modal-edit1<?=$row->id_matkul;?>" class="modal fade">
                 <div class="modal-dialog">
                   <form action="<?php echo site_url('c_matkul/edit'); ?>" method="post">
                   <div class="modal-content">
@@ -185,36 +190,40 @@
                     </div>
                     <div class="modal-body">
                       <!-- WAJIB PRIMARY KEY -->
-                      <input type="hidden" readonly value="<?php echo $row->kode_matkul; ?>" name="kode_matkul" class="form-control" >
+                      <input type="hidden" readonly value="<?php echo $row->id_matkul; ?>" name="id_matkul" class="form-control" >
                       <!-- AKHIR PRIMARY KEY -->
 
                       <div class="form-group">
                         <label for="kode_matkul" class="col-form-label">Kode Mata Kuliah :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="kode_matkul" id="kode_matkul" value="<?php echo $row->kode_matkul; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="kode_matkul"  value="<?php echo $row->kode_matkul; ?>" required>
                       </div>
                       <div class="form-group">
                         <label for="nama_matkul" class="col-form-label">Nama Mata Kuliah :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="nama_matkul" id="nama_matkul" value="<?php echo $row->nama_matkul; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="nama_matkul" value="<?php echo $row->nama_matkul; ?>" required>
                       </div>
                       <div class="form-group">
                         <label for="sks" class="col-form-label">SKS :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="sks" id="sks" value="<?php echo $row->sks; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="sks"  value="<?php echo $row->sks; ?>" required>
                       </div>
                       <div class="form-group">
                         <label for="semester" class="col-form-label">Semester :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="semester" id="semester" value="<?php echo $row->semester; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="semester"  value="<?php echo $row->semester; ?>" required>
                       </div>
                       <div class="form-group">
                         <label for="prodi" class="col-form-label">Program Studi :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="prodi" id="prodi" value="<?php echo $row->prodi; ?>" required>
+                        <select name="id_prodi" class="form-control">
+                            <?php foreach ($prodi as $key => $value) :?>
+                            <option <?= $row->id_prodi == $value->id_prodi ? 'selected' : '' ?> value="<?=$value->id_prodi?>"><?=$value->prodi?></option>
+                            <?php endforeach; ?>
+                        </select>
                       </div>
                       <div class="form-group">
                         <label for="tingkat" class="col-form-label">Tingkat :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="tingkat" id="tingkat" value="<?php echo $row->tingkat; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="tingkat"  value="<?php echo $row->tingkat; ?>" required>
                       </div>
                       <div class="form-group">
                         <label for="tahun_akademik" class="col-form-label">Tahun Akademik :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="tahun_akademik" id="tahun_akademik" value="<?php echo $row->tahun_akademik; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="tahun_akademik" value="<?php echo $row->tahun_akademik; ?>" required>
                       </div>
 
                     </div>

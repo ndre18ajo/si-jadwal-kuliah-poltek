@@ -90,8 +90,17 @@
                                             <td class="text-center"><?php echo $no++; ?>.</td>
                                             <td><?php echo $row->nama_alat; ?></td>
                                             <td class="text-center">
-                                                <button type="submit" class="btn btn-danger">Sedang Dipinjam</button>
-                                                <button type="submit" class="btn btn-success">Tersedia</button>
+                                                <?php if($row->status == 0): ?>
+                                                <button data-toggle="modal" data-target="#modal-pinjam<?=$row->id_alat;?>" type="button" class="btn btn-success">Tersedia</button>
+                                                <?php else :?>
+
+                                                <?php if ($row->user_id == $user->id) : ?>
+                                                <button data-toggle="modal" data-target="#modal-kembali<?=$row->id_alat;?>" type="button" class="btn btn-danger">Kembalikan</button>
+
+                                                <?php else : ?>
+                                                Sedang Dipinjam
+                                                <?php endif; ?>
+                                                <?php endif; ?>
                                             </td>
                                             <td>
                                             	<center>
@@ -141,6 +150,67 @@
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-danger">Hapus</button>
+                      </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+            <?php endforeach; ?>
+            <!-- akhir modal hapus data -->
+
+
+
+            <?php $no=0; foreach($all as $row):  ?>
+            <div class="row">
+              <div id="modal-pinjam<?=$row->id_alat;?>" class="modal fade">
+                <div class="modal-dialog">
+                  <form action="<?php echo site_url('c_alat_peminjaman/pinjam'); ?>" method="post">
+                  <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                      <h4 class="modal-title">Hapus Data</h4>
+                    </div>
+                    <div class="modal-body">
+
+                      <input type="hidden" readonly value="<?php echo $row->id_alat; ?>" name="id_alat" class="form-control" >
+
+                      <div class="form-group">
+                        <div class='col-md-9'><h4>Apakah Anda Yakin Ingin Meminjam Alat ini?</h4></div>
+                      </div>
+                      <br>
+                    </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">IYA</button>
+                      </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+            <?php endforeach; ?>
+
+
+
+             <?php $no=0; foreach($all as $row):  ?>
+            <div class="row">
+              <div id="modal-kembali<?=$row->id_alat;?>" class="modal fade">
+                <div class="modal-dialog">
+                  <form action="<?php echo site_url('c_alat_peminjaman/kembali'); ?>" method="post">
+                  <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                      <h4 class="modal-title">Hapus Data</h4>
+                    </div>
+                    <div class="modal-body">
+
+                      <input type="hidden" readonly value="<?php echo $row->id_alat; ?>" name="id_alat" class="form-control" >
+
+                      <div class="form-group">
+                        <div class='col-md-9'><h4>Apakah Anda Yakin Ingin Mengembalikan Alat ini?</h4></div>
+                      </div>
+                      <br>
+                    </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">IYA</button>
                       </div>
                     </form>
                 </div>

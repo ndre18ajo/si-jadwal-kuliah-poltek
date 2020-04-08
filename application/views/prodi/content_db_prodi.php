@@ -155,7 +155,7 @@
 
                       <div class="form-group">
                         <label for="prodi" class="col-form-label">Program Studi :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="prodi" id="prodi" value="<?php echo $row->prodi; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="prodi"  value="<?php echo $row->prodi; ?>" required>
                       </div>
 
                     </div>

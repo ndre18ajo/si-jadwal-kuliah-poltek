@@ -10,6 +10,7 @@ class c_admin extends CI_Controller {
 	public function index()
 	{
 		$data["title"] = "Dashboard Admin";
+		$data['user'] = $this->session->userdata('user');
 		$this->load->view('dashboard/header_db', $data);
 		$this->load->view('admin/sidebar_db_admin', $data);
 		$this->load->view('admin/content_db_admin', $data);

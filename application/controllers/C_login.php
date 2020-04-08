@@ -10,10 +10,28 @@ class c_login extends CI_Controller {
 	}
 	public function index()
 	{
+
+	
+		if ($this->session->userdata('udhmasuk')) {
+
+			$yglogin = $this->session->userdata('user');
+
+			if($yglogin->level == 'admin'){
+				return redirect('/c_admin/index'); //harus sama dengan method function dibawah nya
+			}elseif($yglogin->level == 'dosen'){
+				return redirect('/c_dosen/dashboard_dosen');
+			}elseif($yglogin->level =='mahasiswa'){
+				return redirect('/c_mahasiswa/dashboard_mahasiswa');
+			}
+		}
 		$this->load->view('login/v_form_login');
 	}
 	public function ceklogin(){
 		$this->load->helper('url');
+
+
+
+	
 
 		if(isset($_POST['login'])){
 			$user = $this->input->post('user',true);
@@ -23,8 +41,12 @@ class c_login extends CI_Controller {
 
 			if($hasil == 1){
 				$yglogin = $this->db->get_where('tb_users',array('username'=>$user, 'password' => $pass))->row();
-				$data = array('udhmasuk' => true,
-						'nama' => $yglogin->nama, 'email' => $yglogin->email, 'username' => $yglogin->username);
+
+				// inject manual foto
+				$yglogin->foto = ($yglogin->foto == '' ? 'assets/foto_profil/user.png' : $yglogin->foto);
+				$data = array('udhmasuk' => true, 'nama' => $yglogin->nama, 'email' => $yglogin->email, 'username' => $yglogin->username, 'user' => $yglogin);
+
+				
 				$this->session->set_userdata($data);
 				if($yglogin->level == 'admin'){
 					redirect('/c_admin/index'); //harus sama dengan method function dibawah nya

@@ -11,6 +11,7 @@ class c_prodi extends CI_Controller {
 	{
 		$data["title"] = "Dashboard Admin";
 		$data["all"] = $this->db->get('tb_prodi')->result();
+        $data['user'] = $this->session->userdata('user');
 		$this->load->view('dashboard/header_db', $data);
 		$this->load->view('admin/sidebar_db_admin', $data);
 		$this->load->view('prodi/content_db_prodi', $data);

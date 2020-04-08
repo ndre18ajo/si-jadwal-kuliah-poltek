@@ -11,6 +11,8 @@ class c_mahasiswa extends CI_Controller {
 	{
 		$data["title"] = "Dashboard Admin";
 		$data["all"] = $this->db->get('tb_mahasiswa')->result();
+		$data['user'] = $this->session->userdata('user');
+		$data['prodi'] = $this->db->get('tb_prodi')->result();
 		$this->load->view('dashboard/header_db', $data);
 		$this->load->view('admin/sidebar_db_admin', $data);
 		$this->load->view('mahasiswa/content_db_mahasiswa', $data);
@@ -23,13 +25,11 @@ class c_mahasiswa extends CI_Controller {
 		$this->form_validation->set_rules('nama_mhs', 'nama_mhs', 'required');
 		$this->form_validation->set_rules('tingkat', 'tingkat', 'required');
 		$this->form_validation->set_rules('semester', 'semester', 'required');
-		$this->form_validation->set_rules('prodi', 'prodi', 'required');
+		$this->form_validation->set_rules('id_prodi', 'id_prodi', 'required');
 		if ($this->form_validation->run() == FALSE)
                 {
-                	$this->load->view('dashboard/header_db', $data);
-					$this->load->view('admin/sidebar_db_admin', $data);
-					$this->load->view('mahasiswa/content_db_mahasiswa', $data);
-					$this->load->view('dashboard/footer_db', $data);
+					$this->session->set_flashdata('flash2', 'Gagal memasukkan data!');
+                    redirect('c_matkul/index');
 					
 				}
 				else
@@ -39,7 +39,8 @@ class c_mahasiswa extends CI_Controller {
                     	"nama_mhs" => $this->input->post('nama_mhs', true),
                     	"tingkat" => $this->input->post('tingkat', true),
                     	"semester" => $this->input->post('semester', true),
-                    	"prodi" => $this->input->post('prodi', true)
+                    	"id_prodi" => $this->input->post('id_prodi', true),
+                    	"prodi" => $this->db->get_where('tb_prodi', array('id_prodi'=>$this->input->post('id_prodi', true)))->row()->prodi,
                     ];
 
                     $this->db->insert('tb_mahasiswa', $data);
@@ -69,7 +70,8 @@ class c_mahasiswa extends CI_Controller {
 		$nama_mhs=$this->input->post('nama_mhs');
 		$tingkat=$this->input->post('tingkat');
 		$semester=$this->input->post('semester');
-		$prodi=$this->input->post('prodi');
+		$id_prodi=$this->input->post('id_prodi');
+      	$prodi = $this->db->get_where('tb_prodi', array('id_prodi'=>$id_prodi))->row()->prodi;
 
 			$data=array(
 				"id_mahasiswa"=>$id_mahasiswa,
@@ -77,8 +79,10 @@ class c_mahasiswa extends CI_Controller {
 				"nama_mhs"=>$nama_mhs,
 				"tingkat"=>$tingkat,
 				"semester"=>$semester,
-				"prodi"=>$prodi
+				"prodi"=>$prodi,
+				"id_prodi" => $id_prodi
 			);
+
 			$this->db->where('id_mahasiswa', $id_mahasiswa);
 			$this->db->update('tb_mahasiswa',$data);
 			$this->session->set_flashdata('flash',"Diubah!");

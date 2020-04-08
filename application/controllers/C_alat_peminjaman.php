@@ -11,6 +11,7 @@ class c_alat_peminjaman extends CI_Controller {
 	{
 		$data["title"] = "Dashboard Admin";
 		$data["all"] = $this->db->get('tb_alat_pinjaman')->result();
+		$data['user'] = $this->session->userdata('user');
 		$this->load->view('dashboard/header_db', $data);
 		$this->load->view('admin/sidebar_db_admin', $data);
 		$this->load->view('alat_peminjaman/content_db_alat_peminjaman', $data);
@@ -66,10 +67,50 @@ class c_alat_peminjaman extends CI_Controller {
 	}
 	public function sidebar_mahasiswa(){
 		$data["title"] = "Dashboard Mahasiswa";
+		$data["all"] = $this->db->get('tb_alat_pinjaman')->result();
+		$data['user'] = $this->session->userdata('user');
 		$this->load->view('dashboard/header_db', $data);
 		$this->load->view('mahasiswa/sidebar_db_mahasiswa', $data);
 		$this->load->view('alat_peminjaman/content_db_alat_peminjaman', $data);
 		$this->load->view('dashboard/footer_db', $data);
+	}
+
+
+
+	public function pinjam()
+	{
+		$id_alat=$this->input->post('id_alat');
+		$user = $this->session->userdata('user');
+		
+		$this->db->update('tb_alat_pinjaman',array('status'=>1, 'user_id' => $user->id), array('id_alat'=>$id_alat));
+
+		$this->session->set_flashdata('flash',"Dipinjam!");
+
+		$yglogin = $this->session->userdata('user');
+
+		if($yglogin->level == 'admin'){
+			return redirect('c_alat_peminjaman/index');
+		} elseif($yglogin->level =='mahasiswa'){
+			return redirect('c_alat_peminjaman/sidebar_mahasiswa');
+		}
+	}
+
+
+
+	public function kembali()
+	{
+		$id_alat=$this->input->post('id_alat');
+
+		$this->db->update('tb_alat_pinjaman',array('status'=>0), array('id_alat'=>$id_alat));
+
+		$this->session->set_flashdata('flash',"Dikembalikan!");
+
+		$yglogin = $this->session->userdata('user');
+		if($yglogin->level == 'admin'){
+			return redirect('c_alat_peminjaman/index');
+		} elseif($yglogin->level =='mahasiswa'){
+			return redirect('c_alat_peminjaman/sidebar_mahasiswa');
+		}
 	}
 
 	
