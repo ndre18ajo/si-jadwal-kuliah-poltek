@@ -37,7 +37,7 @@
 									        	
 										        <div class="form-group">
 										            <label for="nama_kelas" class="col-form-label">Nama Kelas :</label>
-										            <input type="text" class="form-control" name="nama_kelas" id="nama_kelas" placeholder="masukkan nama kelas" required>
+										            <input type="text" class="form-control" name="nama_kelas" placeholder="masukkan nama kelas" required>
 										        </div>
 										        
 										        <div class="modal-footer">
@@ -162,7 +162,7 @@
 
                       <div class="form-group">
                         <label for="nama_kelas" class="col-form-label">Nama Kelas :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="nama_kelas" id="nama_kelas" value="<?php echo $row->nama_kelas; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="nama_kelas" value="<?php echo $row->nama_kelas; ?>" required>
                       </div>
                   
                     </div>

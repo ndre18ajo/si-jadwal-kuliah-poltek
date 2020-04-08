@@ -36,27 +36,26 @@
 									        <form action="<?php echo base_url('c_mahasiswa/tambah');?>" method="post" role="form">
 									        	<div class="form-group">
 										            <label for="nim_mhs" class="col-form-label">NIM Mahasiswa : </label>
-										            <input type="text" class="form-control" name="nim_mhs" id="nim_mhs" placeholder="masukkan NIM mahasiswa" required>
+										            <input type="text" class="form-control" name="nim_mhs"  placeholder="masukkan NIM mahasiswa" required>
 										        </div>
 										        <div class="form-group">
 										            <label for="nama_mhs" class="col-form-label">Nama Mahasiswa :</label>
-										            <input type="text" class="form-control" name="nama_mhs" id="nama_mhs" placeholder="masukkan nama mahasiswa" required>
+										            <input type="text" class="form-control" name="nama_mhs"  placeholder="masukkan nama mahasiswa" required>
 										        </div>
 										        <div class="form-group">
 										            <label for="tingkat" class="col-form-label">Tingkat :</label>
-										            <input type="number" class="form-control" name="tingkat" id="tingkat" placeholder="masukkan tingkat" required>
+										            <input type="number" class="form-control" name="tingkat"  placeholder="masukkan tingkat" required>
 										        </div>
 										        <div class="form-group">
 										            <label for="semester" class="col-form-label">Semester :</label>
-										            <input type="number" class="form-control" name="semester" id="semester" placeholder="masukkan semester" required>
+										            <input type="number" class="form-control" name="semester"  placeholder="masukkan semester" required>
 										        </div>
                             <div class="form-group">
                               <label for="prodi" class='col-form-label'>Program Studi</label><br>
-                                <select name="prodi" class="custom-select mr-sm-2" id="prodi" required="">
-                                  <option value="Pilih">Pilih</option>
-                                  <option value="D3 Keperawatan">D3 Keperawatan</option>
-                                  <option value="Sarjana Terapan Keperawatan">Sarjana Terapan Keperawatan</option>
-                                  <option value="NERS">NERS</option>
+                                <select name="id_prodi" class="form-control">
+                                  <?php foreach ($prodi as $key => $value) :?>
+                                  <option value="<?=$value->id_prodi?>"><?=$value->prodi?></option>
+                                  <?php endforeach; ?>
                                 </select>
                             </div>
 										        
@@ -179,32 +178,31 @@
                     </div>
                     <div class="modal-body">
                       <!-- WAJIB PRIMARY KEY -->
-                      <input type="hidden" readonly value="<?php echo $row->id_mahasiswa; ?>" name="id_mahasiswa" class="form-control" >
+                      <input type="hidden" readonly value="<?php echo $row->id_mahasiswa; ?>"  name="id_mahasiswa" class="form-control" >
                       <!-- AKHIR PRIMARY KEY -->
 
                       <div class="form-group">
                         <label for="nim_mhs" class="col-form-label">NIM Mahasiswa :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="nim_mhs" id="nim_mhs" value="<?php echo $row->nim_mhs; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="nim_mhs"  value="<?php echo $row->nim_mhs; ?>" required>
                       </div>
                       <div class="form-group">
                         <label for="nama_mhs" class="col-form-label">Nama Mahasiswa :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="nama_mhs" id="nama_mhs" value="<?php echo $row->nama_mhs; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="nama_mhs"  value="<?php echo $row->nama_mhs; ?>" required>
                       </div>
                       <div class="form-group">
                         <label for="tingkat" class="col-form-label">Tingkat :</label>
-                        <input type="number" class="form-control" autocomplete="on" name="tingkat" id="tingkat" value="<?php echo $row->tingkat; ?>" required>
+                        <input type="number" class="form-control" autocomplete="on" name="tingkat" value="<?php echo $row->tingkat; ?>" required>
                       </div>
                       <div class="form-group">
                         <label for="semester" class="col-form-label">Semester :</label>
-                        <input type="number" class="form-control" autocomplete="on" name="semester" id="semester" value="<?php echo $row->semester; ?>" required>
+                        <input type="number" class="form-control" autocomplete="on" name="semester" value="<?php echo $row->semester; ?>" required>
                       </div>
                       <div class="form-group">
                         <label for="prodi" class="col-form-label">Program Studi</label><br>
-                          <select name="prodi" class="custom-select mr-sm-2" id="inlineFormCustomSelect" required>
-                            <option value="<?php echo $row->prodi; ?>" hidden><?php echo $row->prodi; ?></option>
-                            <option value="D3 Keperawatan">D3 Keperawatan</option>
-                            <option value="Sarjana Terapan Keperawatan">Sarjana Terapan Keperawatan</option>
-                            <option value="NERS">NERS</option>
+                          <select name="id_prodi" class="form-control">
+                            <?php foreach ($prodi as $key => $value) :?>
+                            <option <?= $row->id_prodi == $value->id_prodi ? 'selected' : '' ?> value="<?=$value->id_prodi?>"><?=$value->prodi?></option>
+                            <?php endforeach; ?>
                           </select>
                       </div>
                       

@@ -11,6 +11,7 @@ class c_users extends CI_Controller {
 	{
 		$data["title"] = "Dashboard Admin";
 		$data["all"] = $this->db->get('tb_users')->result();
+		$data['user'] = $this->session->userdata('user');
 		$this->load->view('dashboard/header_db', $data);
 		$this->load->view('admin/sidebar_db_admin', $data);
 		$this->load->view('users/content_db_users', $data);
@@ -48,15 +49,14 @@ class c_users extends CI_Controller {
 	}
 	public function hapus()
 	{
-		$id_users=$this->input->post('id_users');
+		$id=$this->input->post('id');
 		$username=$this->input->post('username');
 		$nama=$this->input->post('nama');
 		$email=$this->input->post('email');
 		$password=$this->input->post('password');
 		$level=$this->input->post('level');
-		$id_users=$this->input->post('id_users');
 
-		$this->db->where('id_users', $id_users);
+		$this->db->where('id', $id);
 		$this->db->delete('tb_users');
 		$this->session->set_flashdata('flash',"Dihapus!");
 		redirect('c_users/index');
@@ -64,27 +64,39 @@ class c_users extends CI_Controller {
 	}
 	public function edit()
 	{
-		$id_users=$this->input->post('id_users');
+		$id=$this->input->post('id');
 		$username=$this->input->post('username');
 		$nama=$this->input->post('nama');
 		$email=$this->input->post('email');
 		$password=$this->input->post('password');
 		$level=$this->input->post('level');
-		$id_users=$this->input->post('id_users');
 
-			$data=array(
-				"id_users"=>$id_users,
-				"username"=>$username,
-				"nama"=>$nama,
-				"email"=>$email,
-				"password"=>$password,
-				"level"=>$level,
-				"id_users"=>$id_users
-			);
-			$this->db->where('id_users', $id_users);
-			$this->db->update('tb_users',$data);
-			$this->session->set_flashdata('flash',"Diubah!");
-			redirect('c_users/index');
+		$data=array(
+			"id"=>$id,
+			"username"=>$username,
+			"nama"=>$nama,
+			"email"=>$email,
+			"password"=>$password,
+			"level"=>$level,
+		);
+		$this->db->where('id', $id);
+		$this->db->update('tb_users',$data);
+
+
+		$userLogin = $this->session->userdata('user');
+
+
+		// update jika yang di edit user yang sedang logion
+		if ($userLogin->id == $id) {
+			
+            $user = $this->db->get_where('tb_users', array('id'=>$id))->row();
+
+           	$this->session->set_userdata(array('user' => $user));
+		}
+
+
+		$this->session->set_flashdata('flash',"Diubah!");
+		redirect('c_users/index');
 	}
 	
 }

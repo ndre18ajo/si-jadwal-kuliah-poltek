@@ -1,3 +1,6 @@
+
+
+
 <section class="content">
         <div class="container-fluid">
             <div class="row clearfix">
@@ -7,14 +10,14 @@
                         <div class="profile-header">&nbsp;</div>
                         <div class="profile-body">
                             <div class="image-area">
-                                <img src="<?php echo base_url('assets/foto_profil/user.png'); ?>"  alt="foto" />
+                                <img style="width: 48px; height: 48px" src="<?php echo base_url($user->foto); ?>"  alt="foto" />
                             </div>
                             <div class="content-area">
                                 <h3>
-                                    <div class="username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $this->session->userdata('username'); ?></div>
+                                    <div class="username" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $user->username; ?></div>
                                 </h3>
-                                <p><div class="email"><?php echo $this->session->userdata('email'); ?></div></p>
-                                <p><div class="col-pink"><?php echo $this->session->userdata('nama'); ?></div></p>
+                                <p><div class="email"><?php echo $user->email; ?></div></p>
+                                <p><div class="col-pink"><?php echo $user->nama; ?></div></p>
                             </div>
                         </div>
                     </div>
@@ -67,7 +70,7 @@
                                                 <label for="username" class="col-sm-2 control-label">Username</label>
                                                 <div class="col-sm-10">
                                                     <div class="form-line">
-                                                        <input type="text" class="form-control" id="username" name="username" value="<?php echo $this->session->userdata('username'); ?>" required>
+                                                        <input type="text" class="form-control" id="username" name="username" value="<?=$user->username?>" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -75,7 +78,7 @@
                                                 <label for="email" class="col-sm-2 control-label">Email</label>
                                                 <div class="col-sm-10">
                                                     <div class="form-line">
-                                                        <input type="email" class="form-control" id="email" name="email" value="<?php echo $this->session->userdata('email'); ?>" required>
+                                                        <input type="email" class="form-control" id="email" name="email" value="<?= $user->email ?>" required>
                                                     </div>
                                                 </div>
                                             </div>
@@ -84,7 +87,8 @@
                                                 <div class="col-sm-10">
                                                     <div class="form-line">
                                                         <div class="custom-file">
-                                                            <img src="<?php echo base_url('assets/foto_profil/user.png'); ?>" class="img-thumbnail"><br>
+                                                            <img style="max-width: 300px" id="profile-pic" src="<?= base_url($user->foto) ?>" alt="your image" class="img-thumbnail" />
+                                                            <!-- <img src="<?php echo base_url('assets/foto_profil/user.png'); ?>" class="img-thumbnail"><br> -->
                                                             <input type="file" class="custom-file-input" id="foto" name="foto" for="foto">
                                                         </div>
                                                     </div>
@@ -137,3 +141,28 @@
             </div>
         </div>
     </section>
+
+
+
+<!-- disini ada javascript -->
+
+<script type="text/javascript">
+
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+          $('#profile-pic').attr('src', e.target.result);
+        }
+        
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+      }
+    }
+
+    $(document).ready(function() {
+        $("#foto").change(function() {
+          readURL(this);
+        });
+    });
+</script>

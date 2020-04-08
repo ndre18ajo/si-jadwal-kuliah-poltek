@@ -53,7 +53,7 @@
 										        </div>
 										        <div class="form-group">
                               <label for="level" class='col-form-label'>Level :</label><br>
-                                <select name="level" class="custom-select mr-sm-2" id="level" required="">
+                                <select name="level" class="form-control" id="level" required="">
                                   <option value="Pilih">Pilih</option>
                                   <option value="Admin">Admin</option>
                                   <option value="Dosen">Dosen</option>
@@ -119,9 +119,8 @@
                                             <td><?php echo $row->level; ?></td>
                                             <td>
                                             	<center>
-                                            		<a data-toggle="modal" data-target="#modal-edit1<?=$row->id_users;?>" class="btn btn-warning btn-circle" data-popup="tooltip" data-placement="top" title="Edit Data"><i class="material-icons">update</i></a>
-
-                                                    <a data-toggle="modal" data-target="#modal-hapus<?=$row->id_users;?>" class="btn btn-danger btn-circle" data-popup="tooltip" data-placement="top" title="Hapus Data"><i class="material-icons">delete</i></a>
+                                            		<a data-toggle="modal" data-target="#modal-edit1<?=$row->id;?>" class="btn btn-warning btn-circle" data-popup="tooltip" data-placement="top" title="Edit Data"><i class="material-icons">update</i></a>
+                                                <a data-toggle="modal" data-target="#modal-hapus<?=$row->id;?>" class="btn btn-danger btn-circle" data-popup="tooltip" data-placement="top" title="Hapus Data"><i class="material-icons">delete</i></a>
                                             	</center>
                                             </td>
                                         </tr>
@@ -140,7 +139,7 @@
             <!-- modal hapus data -->
             <?php $no=0; foreach($all as $row):  ?>
             <div class="row">
-              <div id="modal-hapus<?=$row->id_users;?>" class="modal fade">
+              <div id="modal-hapus<?=$row->id;?>" class="modal fade">
                 <div class="modal-dialog">
                   <form action="<?php echo site_url('c_users/hapus'); ?>" method="post">
                   <div class="modal-content">
@@ -149,7 +148,7 @@
                     </div>
                     <div class="modal-body">
 
-                      <input type="hidden" readonly value="<?php echo $row->id_users; ?>" name="id_users" class="form-control" >
+                      <input type="hidden" readonly value="<?php echo $row->id; ?>" name="id" class="form-control" >
 
                       <div class="form-group">
                         <div class='col-md-9'><h4>Apakah Anda Yakin Ingin Menghapus Data ini?</h4></div>
@@ -170,7 +169,7 @@
             <!-- modal ubah -->
             <?php $no=0; foreach($all as $row):  ?>
             <div class="row">
-              <div id="modal-edit1<?=$row->id_users;?>" class="modal fade">
+              <div id="modal-edit1<?=$row->id;?>" class="modal fade">
                 <div class="modal-dialog">
                   <form action="<?php echo site_url('c_users/edit'); ?>" method="post">
                   <div class="modal-content">
@@ -180,28 +179,28 @@
                     </div>
                     <div class="modal-body">
                       <!-- WAJIB PRIMARY KEY -->
-                      <input type="hidden" readonly value="<?php echo $row->id_users; ?>" name="id_users" class="form-control" >
+                      <input type="hidden" readonly value="<?php echo $row->id; ?>" name="id" class="form-control" >
                       <!-- AKHIR PRIMARY KEY -->
 
                       <div class="form-group">
                         <label for="username" class="col-form-label">Username :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="username" id="username" value="<?php echo $row->username; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="username"  value="<?php echo $row->username; ?>" required>
                       </div>
                       <div class="form-group">
                         <label for="nama" class="col-form-label">Nama :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="nama" id="nama" value="<?php echo $row->nama; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="nama"  value="<?php echo $row->nama; ?>" required>
                       </div>
                       <div class="form-group">
                         <label for="email" class="col-form-label">Email :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="email" id="email" value="<?php echo $row->email; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="email"  value="<?php echo $row->email; ?>" required>
                       </div>
                       <div class="form-group">
                         <label for="password" class="col-form-label">Password :</label>
-                        <input type="text" class="form-control" autocomplete="on" name="password" id="password" value="<?php echo $row->password; ?>" required>
+                        <input type="text" class="form-control" autocomplete="on" name="password"  value="<?php echo $row->password; ?>" required>
                       </div>
                       <div class="form-group">
                         <label for="level" class="col-form-label">Level :</label><br>
-                          <select name="level" class="custom-select mr-sm-2" id="inlineFormCustomSelect" required>
+                          <select name="level" class="form-control" required>
                             <option value="<?php echo $row->level; ?>" hidden><?php echo $row->level; ?></option>
                             <option value="Admin">Admin</option>
                             <option value="Dosen">Dosen</option>
